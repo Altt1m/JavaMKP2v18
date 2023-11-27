@@ -9,10 +9,10 @@ public class CopyEvenLines
 {
     public static void main(String[] args)
     {
-        String inputFile = "F1.txt";
-        String outputFile = "F2.txt";
+        String inputFile = "F1.txt"; // Перший файл
+        String outputFile = "F2.txt"; // Другий файл
 
-        try
+        try // Спроба виконання програми
         {
             // Перевіряємо, чи існує файл F1
             File fileF1 = new File(inputFile);
@@ -37,24 +37,27 @@ public class CopyEvenLines
             System.out.println("Розмір файлу F1: " + sizeF1 + " байт");
             System.out.println("Розмір файлу F2: " + sizeF2 + " байт");
         }
-        catch (IOException e)
+        catch (IOException e) // Відловлювач помилки вводу
         {
-            e.printStackTrace();
+            e.printStackTrace(); // Виведення помилки
         }
     }
 
+    // Основний метод для копіювання
     private static void copyEvenLines(String inputFile, String outputFile) throws IOException
     {
+        // Спроба виконання зі створенням Writer i Reader
         try (BufferedReader reader = new BufferedReader(new FileReader(inputFile));
              BufferedWriter writer = new BufferedWriter(new FileWriter(outputFile)))
         {
 
-            String line;
-            int lineNumber = 0;
+            String line; // Поточний рядок
+            int lineNumber = 0; // Номер рядка
 
+            // Доки не закінчаться рядки
             while ((line = reader.readLine()) != null)
             {
-                lineNumber++;
+                lineNumber++; // Інкрементація рядка (наступний)
 
                 // Копіюємо тільки парні рядки
                 if (lineNumber % 2 == 0)
@@ -66,12 +69,13 @@ public class CopyEvenLines
         }
     }
 
-    private static long getFileSize(String filePath)
+    private static long getFileSize(String filePath) // Метод отримання розміру
     {
         File file = new File(filePath);
         return file.length();
     }
 
+    // Виведення змісту файлу
     private static void displayFileContent(String filePath) throws IOException
     {
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath)))
